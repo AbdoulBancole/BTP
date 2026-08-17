@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gestion Moyens de Levage - Chantier Data Center</title>
+
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+
+  <header>
+    <div class="container">
+
+      <div class="header-content">
+
+        <a href="#" class="logo">
+          Gestion Grues Chantier
+        </a>
+
+        <nav>
+
+        <a href="#"
+            class="nav-link active"
+            data-page="form">
+            Planning
+        </a>
+
+        <a href="#"
+            class="nav-link"
+            data-page="plan-lider">
+            Plan LIDER
+        </a>
+
+        <button
+            type="button"
+            id="reset-planning-btn"
+            class="btn-secondary"
+            style="margin-left: 1rem;">
+            Réinitialiser
+        </button>
+
+        </nav>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================================
+       CONTENU PRINCIPAL
+       ========================================================= -->
+
+  <main class="container">
+
+    <!-- =======================================================
+         PAGE PLANNING
+         ======================================================= -->
+
+    <section id="form-page" class="page active">
+
+      <!-- ================= PLANNING ================= -->
+
+      <div class="form-section">
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+          "
+        >
+
+          <h2
+            class="form-title"
+            style="margin: 0;">
+            Vue Planning - Grues et horaires
+          </h2>
+
+          <button
+            type="button"
+            id="open-activity-form"
+            class="btn-primary">
+            Ajouter une activité
+          </button>
+
+        </div>
+
+
+        <div
+          style="
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+          "
+        >
+
+          <label for="calendar-date">
+            Sélectionner une date :
+          </label>
+
+          <input
+            type="date"
+            id="calendar-date"
+            style="
+              padding: 0.5rem;
+              border: 1px solid #e2e8f0;
+              border-radius: 0.5rem;
+            "
+          >
+
+        </div>
+
+
+        <div
+          id="planning-calendar"
+          style="overflow-x: auto;">
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           FORMULAIRE ACTIVITÉ
+           ===================================================== -->
+
+      <div
+        id="activity-form-panel"
+        class="form-section">
+
+        <h1 class="form-title">
+          Nouvelle activité de levage
+        </h1>
+
+
+        <!-- Messages -->
+
+        <div id="message-container"></div>
+
+
+        <!-- Formulaire -->
+
+        <form id="activity-form">
+
+          <div class="form-grid">
+
+
+            <!-- ================= DATE ================= -->
+
+            <div class="form-group">
+
+              <label for="date">
+                Date *
+              </label>
+
+              <input
+                type="date"
+                id="date"
+                name="date"
+                required>
+
+            </div>
+
+
+            <!-- ================= ZONE ================= -->
+
+            <div class="form-group">
+
+              <label for="zone">
+                Zone *
+              </label>
+
+              <select
+                id="zone"
+                name="zone"
+                required>
+
+                <option value="">
+                  -- Sélectionner --
+                </option>
+
+                <option value="FOH">
+                  FOH
+                </option>
+
+                <option value="Data 1">
+                  Data 1
+                </option>
+
+                <option value="Data 2">
+                  Data 2
+                </option>
+
+                <option value="Data 3">
+                  Data 3
+                </option>
+
+                <option value="Data 4">
+                  Data 4
+                </option>
+
+                <option value="Data 5">
+                  Data 5
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- ================= ACTIVITÉ ================= -->
+
+            <div class="form-group">
+
+              <label for="activite">
+                Activité *
+              </label>
+
+              <select
+                id="activite"
+                name="activite"
+                required>
+
+                <option value="">
+                  -- Sélectionner --
+                </option>
+
+                <option value="Pose poteau">
+                  Pose poteau
+                </option>
+
+                <option value="Pose prémur">
+                  Pose prémur
+                </option>
+
+                <option value="Pose poutre">
+                  Pose poutre
+                </option>
+
+                <option value="Pose prédalle">
+                  Pose prédalle
+                </option>
+
+                <option value="Pose DAP">
+                  Pose DAP
+                </option>
+
+                <option value="Autre">
+                  Autre
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- ================= NIVEAU ================= -->
+
+            <div class="form-group">
+
+              <label for="niveau">
+                Niveau *
+              </label>
+
+              <select
+                id="niveau"
+                name="niveau"
+                required>
+
+                <option value="">
+                  -- Sélectionner --
+                </option>
+
+                <option value="RDC">
+                  RDC
+                </option>
+
+                <option value="R1">
+                  R1
+                </option>
+
+                <option value="R2">
+                  R2
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 TYPE ÉLÉMENT
+                 ================================================= -->
+
+            <div class="form-group">
+
+              <label for="type-element">
+                Type Élément *
+              </label>
+
+              <select
+                id="type-element"
+                name="typeElement"
+                required>
+
+                <option value="">
+                  -- Sélectionner --
+                </option>
+
+                <option value="Structurel">
+                  Structurel
+                </option>
+
+                <option value="Façade">
+                  Façade
+                </option>
+
+                <option value="Équipement">
+                  Équipement
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 ÉLÉMENT — LISTE DYNAMIQUE
+                 ================================================= -->
+
+            <div class="form-group">
+
+              <label for="element">
+                Élément *
+              </label>
+
+              <select
+                id="element"
+                name="element"
+                class="element-select"
+                required>
+
+                <option value="">
+                  -- Sélectionner un élément --
+                </option>
+
+                <option value="Poteau">
+                  Poteau
+                </option>
+
+                <option value="Poutre">
+                  Poutre
+                </option>
+
+                <option value="DAP">
+                  DAP
+                </option>
+
+                <option value="Prédalle">
+                  Prédalle
+                </option>
+
+                <option value="Prémur">
+                  Prémur
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- ================= GRUE ================= -->
+
+            <div class="form-group">
+
+              <label for="grue">
+                Grue *
+              </label>
+
+              <select
+                id="grue"
+                name="grue"
+                required>
+
+                <option value="">
+                  -- Sélectionner --
+                </option>
+
+                <option value="G1">
+                  G1
+                </option>
+
+                <option value="G2">
+                  G2
+                </option>
+
+                <option value="G3">
+                  G3
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 HEURE DÉBUT
+                 ================================================= -->
+
+            <div class="form-group">
+
+              <label for="heure-debut">
+                Heure Début *
+              </label>
+
+              <div class="time-picker-wrapper">
+
+                <!-- Valeur réellement envoyée au formulaire -->
+
+                <input
+                  type="time"
+                  id="heure-debut"
+                  name="heureDebut"
+                  class="hidden-time-input"
+                  required>
+
+                <!-- Affichage utilisateur -->
+
+                <input
+                  type="text"
+                  id="heure-debut-display"
+                  class="time-input-display"
+                  placeholder="Sélectionner une heure"
+                  readonly
+                  onclick="openHourPicker('heure-debut')">
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 HEURE FIN
+                 ================================================= -->
+
+            <div class="form-group">
+
+              <label for="heure-fin">
+                Heure Fin *
+              </label>
+
+              <div class="time-picker-wrapper">
+
+                <input
+                  type="time"
+                  id="heure-fin"
+                  name="heureFin"
+                  class="hidden-time-input"
+                  required>
+
+                <input
+                  type="text"
+                  id="heure-fin-display"
+                  class="time-input-display"
+                  placeholder="Sélectionner une heure"
+                  readonly
+                  onclick="openHourPicker('heure-fin')">
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 HEURE LIVRAISON
+                 ================================================= -->
+
+            <div class="form-group">
+
+              <label for="heure-livraison">
+                Heure Livraison
+              </label>
+
+              <div class="time-picker-wrapper">
+
+                <input
+                  type="time"
+                  id="heure-livraison"
+                  name="heureLivraison"
+                  class="hidden-time-input">
+
+                <input
+                  type="text"
+                  id="heure-livraison-display"
+                  class="time-input-display"
+                  placeholder="Sélectionner une heure"
+                  readonly
+                  onclick="openHourPicker('heure-livraison')">
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= BOUTONS ================= -->
+
+          <div class="button-group">
+
+            <button
+              type="submit"
+              class="btn-primary">
+              Enregistrer
+            </button>
+
+            <button
+              type="button"
+              id="close-activity-form"
+              class="btn-secondary">
+              Fermer
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <!-- =====================================================
+           LISTE DES ACTIVITÉS
+           ===================================================== -->
+
+      <div class="table-container hidden">
+
+        <h2
+          style="
+            padding: 1.5rem 1.5rem 0;
+            margin: 0;
+          ">
+          Activités enregistrées
+        </h2>
+
+
+        <!-- FILTRES -->
+
+        <div
+          style="
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+          ">
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns:
+                repeat(auto-fit, minmax(150px, 1fr));
+              gap: 1rem;
+              margin-bottom: 1rem;
+            ">
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+              <label>
+                Filtrer par Date
+              </label>
+
+              <input
+                type="date"
+                id="filter-date"
+                onchange="applyFilters()"
+                style="
+                  padding: 0.5rem;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 0.5rem;
+                  width: 100%;
+                ">
+
+            </div>
+
+
+            <!-- ZONE -->
+
+            <div class="form-group">
+
+              <label>
+                Filtrer par Zone
+              </label>
+
+              <select
+                id="filter-zone"
+                onchange="applyFilters()"
+                style="
+                  padding: 0.5rem;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 0.5rem;
+                  width: 100%;
+                ">
+
+                <option value="">
+                  -- Toutes les zones --
+                </option>
+
+                <option value="FOH">
+                  FOH
+                </option>
+
+                <option value="Data 1">
+                  Data 1
+                </option>
+
+                <option value="Data 2">
+                  Data 2
+                </option>
+
+                <option value="Data 3">
+                  Data 3
+                </option>
+
+                <option value="Data 4">
+                  Data 4
+                </option>
+
+                <option value="Data 5">
+                  Data 5
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- GRUE -->
+
+            <div class="form-group">
+
+              <label>
+                Filtrer par Grue
+              </label>
+
+              <select
+                id="filter-grue"
+                onchange="applyFilters()"
+                style="
+                  padding: 0.5rem;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 0.5rem;
+                  width: 100%;
+                ">
+
+                <option value="">
+                  -- Toutes les grues --
+                </option>
+
+                <option value="G1">
+                  G1
+                </option>
+
+                <option value="G2">
+                  G2
+                </option>
+
+                <option value="G3">
+                  G3
+                </option>
+
+                <option value="G4">
+                  G4
+                </option>
+
+                <option value="G5">
+                  G5
+                </option>
+
+                <option value="GM">
+                  GM
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- ACTIVITÉ -->
+
+            <div class="form-group">
+
+              <label>
+                Filtrer par Activité
+              </label>
+
+              <select
+                id="filter-activite"
+                onchange="applyFilters()"
+                style="
+                  padding: 0.5rem;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 0.5rem;
+                  width: 100%;
+                ">
+
+                <option value="">
+                  -- Toutes les activités --
+                </option>
+
+                <option value="Pose poteau">
+                  Pose poteau
+                </option>
+
+                <option value="Pose prémur">
+                  Pose prémur
+                </option>
+
+                <option value="Pose poutre">
+                  Pose poutre
+                </option>
+
+                <option value="Pose prédalle">
+                  Pose prédalle
+                </option>
+
+                <option value="Pose DAP">
+                  Pose DAP
+                </option>
+
+                <option value="Autre">
+                  Autre
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="clearFilters()"
+            style="font-size: 0.875rem;">
+            Réinitialiser les filtres
+          </button>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <table id="activities-table">
+
+          <thead>
+
+            <tr>
+
+              <th>Date</th>
+
+              <th>Zone</th>
+
+              <th>Activité</th>
+
+              <th>Grue</th>
+
+              <th>Horaires</th>
+
+              <th>Élément</th>
+
+              <th>Actions</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="activities-body"></tbody>
+
+        </table>
+
+
+        <div
+          id="empty-message"
+          class="text-center"
+          style="
+            padding: 2rem;
+            color: #94a3b8;
+          ">
+
+          Aucune activité enregistrée
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PAGE PLANNING GÉNÉRAL
+         ===================================================== -->
+
+    <section
+      id="planning-page"
+      class="page hidden">
+
+      <div class="form-section">
+
+        <h1 class="form-title">
+          Planning général
+        </h1>
+
+        <div id="planning-content"></div>
+
+      </div>
+
+    </section>
+    
+<!-- =====================================================
+     PAGE PLAN LIDER
+     ===================================================== -->
+
+<section
+  id="plan-lider-page"
+  class="page hidden">
+
+  <div class="form-section">
+
+    <div class="plan-lider-header">
+
+      <div>
+
+        <h1 class="form-title">
+          Plan LIDER
+        </h1>
+
+        <p class="plan-lider-description">
+          Consultation et modification du plan LIDER.
+        </p>
+
+      </div>
+
+
+      <div class="plan-lider-actions">
+
+        <!-- OUVRIR POWERPOINT -->
+
+        <button
+          type="button"
+          id="open-plan-lider"
+          class="btn-primary">
+
+          Ouvrir le PowerPoint
+
+        </button>
+
+
+        <!-- TÉLÉCHARGER LA VERSION ACTUELLE -->
+
+        <a
+          href="/plan-lider/plan-lider.pptx"
+          id="download-plan-lider"
+          download
+          class="btn-secondary">
+
+          Télécharger
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         STATUT DU FICHIER
+         ================================================= -->
+
+    <div
+      id="plan-lider-status"
+      class="plan-lider-status"
+      style="
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+      ">
+
+      Vérification du fichier PowerPoint...
+
+    </div>
+
+
+    <!-- =================================================
+         ZONE POWERPOINT
+         ================================================= -->
+
+    <div
+      id="plan-lider-viewer"
+      class="plan-lider-viewer">
+
+      <div class="plan-lider-empty">
+
+        <div class="plan-lider-icon">
+          PPT
+        </div>
+
+        <h2>
+          Plan LIDER
+        </h2>
+
+        <p>
+          Cliquez sur « Ouvrir le PowerPoint »
+          pour modifier le plan dans PowerPoint.
+        </p>
+
+        <p
+          style="
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-top: 0.75rem;
+          ">
+
+          Les modifications enregistrées dans PowerPoint
+          sont automatiquement détectées par l'application.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  </main>
+
+
+  <!-- =========================================================
+       MODAL CONFLITS
+       ========================================================= -->
+
+  <div
+    id="conflict-modal"
+    class="modal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h2>
+          Conflit détecté
+        </h2>
+
+        <button
+          class="modal-close"
+          type="button">
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div id="conflict-message"></div>
+
+        <div
+          class="button-group"
+          style="margin-top: 2rem;">
+
+          <button
+            id="conflict-confirm"
+            class="btn-primary">
+            Enregistrer malgré tout
+          </button>
+
+          <button
+            id="conflict-cancel"
+            class="btn-secondary">
+            Annuler
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       MODAL SÉLECTEUR D'HEURE
+       ========================================================= -->
+
+  <div
+    id="hour-picker-modal"
+    class="hour-picker-modal">
+
+    <div class="hour-picker">
+
+
+      <!-- HEADER -->
+
+      <div class="hour-picker-header">
+
+        <button
+          type="button"
+          class="hour-picker-cancel"
+          onclick="closeHourPicker()">
+          Annuler
+        </button>
+
+        <h3>
+          Choisir l'heure
+        </h3>
+
+        <button
+          type="button"
+          class="hour-picker-confirm"
+          onclick="confirmHourPicker()">
+          OK
+        </button>
+
+      </div>
+
+
+      <!-- APERÇU -->
+
+      <div
+        id="selected-time-preview"
+        class="selected-time-preview">
+        08:00
+      </div>
+
+
+      <!-- ROUES -->
+
+      <div class="time-wheels">
+
+
+        <!-- HEURES -->
+
+        <div class="time-wheel-container">
+
+          <div
+            id="hour-wheel"
+            class="time-wheel">
+
+            <!-- généré par JS -->
+
+          </div>
+
+        </div>
+
+
+        <!-- : -->
+
+        <div class="time-separator">
+          :
+        </div>
+
+
+        <!-- MINUTES -->
+
+        <div class="time-wheel-container">
+
+          <div
+            id="minute-wheel"
+            class="time-wheel">
+
+            <!-- généré par JS -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPTS EXISTANTS
+       ========================================================= -->
+
+  <script src="data.js"></script>
+
+  <script src="conflicts.js"></script>
+
+  <script src="script.js"></script>
+
+
+  <!-- =========================================================
+       SCRIPT SÉLECTEUR D'HEURE
+       ========================================================= -->
+
+  <script>
+
+    /*
+     * Élément actuellement modifié.
+     *
+     * Exemple :
+     * "heure-debut"
+     * "heure-fin"
+     * "heure-livraison"
+     */
+
+    let currentTimeInputId = null;
+
+
+    let selectedHour = 8;
+
+    let selectedMinute = 0;
+
+
+    /* =========================================================
+       CRÉATION DES ROUES
+       ========================================================= */
+
+    function initializeTimeWheels() {
+
+      const hourWheel =
+        document.getElementById("hour-wheel");
+
+      const minuteWheel =
+        document.getElementById("minute-wheel");
+
+
+      hourWheel.innerHTML = "";
+
+      minuteWheel.innerHTML = "";
+
+
+      /*
+       * HEURES
+       */
+
+      for (let hour = 0; hour < 24; hour++) {
+
+        const option =
+          document.createElement("div");
+
+        option.className = "time-option";
+
+        option.dataset.value = hour;
+
+        option.textContent =
+          String(hour).padStart(2, "0");
+
+
+        option.addEventListener(
+          "click",
+          () => {
+
+            selectedHour = hour;
+
+            updateSelectedTime();
+
+            scrollToTime(
+              hourWheel,
+              hour
+            );
+
+          }
+        );
+
+
+        hourWheel.appendChild(option);
+
+      }
+
+
+      /*
+       * MINUTES
+       *
+       * On utilise des intervalles de 5 minutes,
+       * comme sur une interface de sélection d'heure
+       * simplifiée.
+       */
+
+      for (let minute = 0; minute < 60; minute += 5) {
+
+        const option =
+          document.createElement("div");
+
+        option.className = "time-option";
+
+        option.dataset.value = minute;
+
+        option.textContent =
+          String(minute).padStart(2, "0");
+
+
+        option.addEventListener(
+          "click",
+          () => {
+
+            selectedMinute = minute;
+
+            updateSelectedTime();
+
+            scrollToTime(
+              minuteWheel,
+              minute
+            );
+
+          }
+        );
+
+
+        minuteWheel.appendChild(option);
+
+      }
+
+
+      /*
+       * Mise à jour lors du scroll
+       */
+
+      hourWheel.addEventListener(
+        "scroll",
+        debounce(() => {
+
+          const index =
+            Math.round(
+              hourWheel.scrollTop / 70
+            );
+
+          selectedHour =
+            Math.max(
+              0,
+              Math.min(23, index)
+            );
+
+          updateSelectedTime();
+
+        }, 100)
+      );
+
+
+      minuteWheel.addEventListener(
+        "scroll",
+        debounce(() => {
+
+          const index =
+            Math.round(
+              minuteWheel.scrollTop / 70
+            );
+
+          selectedMinute =
+            Math.max(
+              0,
+              Math.min(55, index * 5)
+            );
+
+          updateSelectedTime();
+
+        }, 100)
+      );
+
+    }
+
+
+    /* =========================================================
+       OUVRIR LE SÉLECTEUR
+       ========================================================= */
+
+    function openHourPicker(inputId) {
+
+      currentTimeInputId = inputId;
+
+
+      const input =
+        document.getElementById(inputId);
+
+
+      /*
+       * Si une heure existe déjà,
+       * on la récupère.
+       */
+
+      if (input.value) {
+
+        const parts =
+          input.value.split(":");
+
+        selectedHour =
+          parseInt(parts[0], 10);
+
+        selectedMinute =
+          parseInt(parts[1], 10);
+
+        /*
+         * On arrondit les minutes
+         * à l'intervalle de 5.
+         */
+
+        selectedMinute =
+          Math.round(selectedMinute / 5) * 5;
+
+        if (selectedMinute === 60) {
+
+          selectedMinute = 55;
+
+        }
+
+      } else {
+
+        /*
+         * Heure par défaut :
+         * heure actuelle.
+         */
+
+        const now = new Date();
+
+        selectedHour =
+          now.getHours();
+
+        selectedMinute =
+          Math.round(
+            now.getMinutes() / 5
+          ) * 5;
+
+        if (selectedMinute === 60) {
+
+          selectedMinute = 55;
+
+        }
+
+      }
+
+
+      updateSelectedTime();
+
+
+      /*
+       * Affichage du modal
+       */
+
+      const modal =
+        document.getElementById(
+          "hour-picker-modal"
+        );
+
+      modal.classList.add("active");
+
+
+      /*
+       * Positionner les roues
+       */
+
+      setTimeout(() => {
+
+        const hourWheel =
+          document.getElementById(
+            "hour-wheel"
+          );
+
+        const minuteWheel =
+          document.getElementById(
+            "minute-wheel"
+          );
+
+
+        scrollToTime(
+          hourWheel,
+          selectedHour,
+          false
+        );
+
+
+        scrollToTime(
+          minuteWheel,
+          selectedMinute,
+          false
+        );
+
+      }, 50);
+
+    }
+
+
+    /* =========================================================
+       POSITIONNER LA ROUE
+       ========================================================= */
+
+    function scrollToTime(
+      wheel,
+      value,
+      smooth = true
+    ) {
+
+      let index;
+
+
+      /*
+       * Pour les heures :
+       * 00 -> index 0
+       * 01 -> index 1
+       * etc.
+       */
+
+      if (wheel.id === "hour-wheel") {
+
+        index = value;
+
+      }
+
+      /*
+       * Pour les minutes :
+       * 00 -> index 0
+       * 05 -> index 1
+       * 10 -> index 2
+       */
+
+      else {
+
+        index = Math.round(value / 5);
+
+      }
+
+
+      wheel.scrollTo({
+
+        top: index * 70,
+
+        behavior:
+          smooth ? "smooth" : "auto"
+
+      });
+
+    }
+
+
+    /* =========================================================
+       MISE À JOUR DE L'APERÇU
+       ========================================================= */
+
+    function updateSelectedTime() {
+
+      const preview =
+        document.getElementById(
+          "selected-time-preview"
+        );
+
+
+      const hour =
+        String(selectedHour)
+          .padStart(2, "0");
+
+
+      const minute =
+        String(selectedMinute)
+          .padStart(2, "0");
+
+
+      preview.textContent =
+        `${hour}:${minute}`;
+
+
+      /*
+       * Mise en évidence
+       * de l'élément sélectionné.
+       */
+
+      document
+        .querySelectorAll(
+          "#hour-wheel .time-option"
+        )
+        .forEach(option => {
+
+          option.classList.toggle(
+            "selected",
+            parseInt(option.dataset.value)
+              === selectedHour
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(
+          "#minute-wheel .time-option"
+        )
+        .forEach(option => {
+
+          option.classList.toggle(
+            "selected",
+            parseInt(option.dataset.value)
+              === selectedMinute
+          );
+
+        });
+
+    }
+
+
+    /* =========================================================
+       CONFIRMER
+       ========================================================= */
+
+    function confirmHourPicker() {
+
+      if (!currentTimeInputId) {
+
+        return;
+
+      }
+
+
+      const hour =
+        String(selectedHour)
+          .padStart(2, "0");
+
+
+      const minute =
+        String(selectedMinute)
+          .padStart(2, "0");
+
+
+      const timeValue =
+        `${hour}:${minute}`;
+
+
+      /*
+       * Champ réel du formulaire
+       */
+
+      const input =
+        document.getElementById(
+          currentTimeInputId
+        );
+
+
+      input.value = timeValue;
+
+
+      /*
+       * Champ visible
+       */
+
+      const display =
+        document.getElementById(
+          `${currentTimeInputId}-display`
+        );
+
+
+      display.value =
+        timeValue;
+
+
+      closeHourPicker();
+
+    }
+
+
+    /* =========================================================
+       FERMER
+       ========================================================= */
+
+    function closeHourPicker() {
+
+      const modal =
+        document.getElementById(
+          "hour-picker-modal"
+        );
+
+      modal.classList.remove("active");
+
+      currentTimeInputId = null;
+
+    }
+
+
+    /* =========================================================
+       DEBOUNCE
+       ========================================================= */
+
+    function debounce(
+      callback,
+      delay
+    ) {
+
+      let timeout;
+
+      return function (...args) {
+
+        clearTimeout(timeout);
+
+        timeout =
+          setTimeout(
+            () => callback.apply(this, args),
+            delay
+          );
+
+      };
+
+    }
+
+
+    /* =========================================================
+       INITIALISATION
+       ========================================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        initializeTimeWheels();
+
+
+        /*
+         * Fermeture en cliquant
+         * en dehors du sélecteur.
+         */
+
+        const modal =
+          document.getElementById(
+            "hour-picker-modal"
+          );
+
+
+        modal.addEventListener(
+          "click",
+          event => {
+
+            if (
+              event.target === modal
+            ) {
+
+              closeHourPicker();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>

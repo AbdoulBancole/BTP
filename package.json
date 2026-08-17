@@ -1,0 +1,16 @@
+{
+  "name": "btp",
+  "version": "1.0.0",
+  "description": "Prototype frontend simple pour la gestion des activités et des conflits d’utilisation des grues.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^43.4.0"
+  }
+}
